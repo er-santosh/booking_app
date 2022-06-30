@@ -71,3 +71,15 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Strong Password Regex
+
+* Passwords will contain at least 1 upper case letter
+* Passwords will contain at least 1 lower case letter
+* Passwords will contain at least 1 number or special character
+* There is **no** length validation (min, max) in this regex!
+
+Regular expression for JavaScript:
+```bash
+/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+```

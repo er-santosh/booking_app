@@ -1,4 +1,4 @@
-import { ParamsWithMongoId } from 'src/utils/paramsWithMongoId';
+import { ValidMongoId } from 'src/utils/ValidMongoId';
 import { UpdateHotelDto } from './dtos/update-hotel.dto';
 import { CreateHotelDto } from './dtos/create-hotel.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -22,7 +22,7 @@ export class HotelsService {
   }
 
   async update(
-    id: ParamsWithMongoId['id'],
+    id: ValidMongoId['id'],
     updateHotelDto: UpdateHotelDto,
   ): Promise<Hotel> {
     const updatedHotel = await this.hotelModel.findByIdAndUpdate(
@@ -36,7 +36,7 @@ export class HotelsService {
     return updatedHotel;
   }
 
-  async delete(id: ParamsWithMongoId['id']) {
+  async delete(id: ValidMongoId['id']) {
     const deletedHotel = await this.hotelModel.findByIdAndRemove(id);
     if (!deletedHotel) {
       throw new NotFoundException('Hotel Not Found');
@@ -44,7 +44,7 @@ export class HotelsService {
     return deletedHotel;
   }
 
-  async findById(id: ParamsWithMongoId['id']) {
+  async findById(id: ValidMongoId['id']) {
     const hotel = await this.hotelModel.findById(id);
     if (!hotel) {
       throw new NotFoundException('Hotel Not Found');

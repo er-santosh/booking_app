@@ -10,7 +10,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ParamsWithMongoId } from 'src/utils/paramsWithMongoId';
+import { ValidMongoId } from 'src/utils/ValidMongoId';
 
 @Controller('hotels')
 export class HotelsController {
@@ -21,7 +21,7 @@ export class HotelsController {
   }
 
   @Get(':id')
-  findOne(@Param() { id }: ParamsWithMongoId) {
+  findOne(@Param() { id }: ValidMongoId) {
     return this.hotelsService.findById(id);
   }
 
@@ -33,12 +33,12 @@ export class HotelsController {
   @Put(':id')
   update(
     @Body() updateHotelDto: UpdateHotelDto,
-    @Param() { id }: ParamsWithMongoId,
+    @Param() { id }: ValidMongoId,
   ) {
     return this.hotelsService.update(id, updateHotelDto);
   }
   @Delete(':id')
-  delete(@Param() { id }: ParamsWithMongoId) {
+  delete(@Param() { id }: ValidMongoId) {
     return this.hotelsService.delete(id);
   }
 }

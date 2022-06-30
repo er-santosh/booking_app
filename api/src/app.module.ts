@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { HotelsModule } from './modules/hotels/hotels.module';
 import { RoomsModule } from './modules/rooms/rooms.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -16,12 +18,17 @@ import * as Joi from 'joi';
         MONGO_DATABASE: Joi.string().required(),
         MONGO_HOST: Joi.string().required(),
         MONGO_URI: Joi.string().required(),
+        JWT_ACCESS_TOKEN_SECRET: Joi.string().required(),
+        JWT_ACCESS_TOKEN_EXPIRATION_TIME: Joi.string().required(),
       }),
       expandVariables: true,
+      isGlobal: true,
     }),
     DatabaseModule,
     HotelsModule,
     RoomsModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
