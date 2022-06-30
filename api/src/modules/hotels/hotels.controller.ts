@@ -37,6 +37,7 @@ export class HotelsController {
   ) {
     return this.hotelsService.update(id, updateHotelDto);
   }
+
   @Delete(':id')
   delete(@Param() { id }: ValidMongoId) {
     return this.hotelsService.delete(id);

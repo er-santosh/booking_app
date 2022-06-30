@@ -8,6 +8,7 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     let error;
+
     switch (exception.name && exception.code) {
       case 'NotFoundException': {
         error = {
@@ -31,7 +32,6 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
           message: 'Mongo Server Error',
         };
         break;
-
       default: {
         error = {
           statusCode: HttpStatus.INTERNAL_SERVER_ERROR,

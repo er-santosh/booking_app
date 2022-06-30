@@ -8,7 +8,7 @@ import { RoomsModule } from './modules/rooms/rooms.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import * as Joi from 'joi';
-
+// import { ThrottlerModule } from '@nestjs/throttler';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +25,10 @@ import * as Joi from 'joi';
       isGlobal: true,
     }),
     DatabaseModule,
+    // ThrottlerModule.forRoot({
+    //   ttl: 60,
+    //   limit: 10,
+    // }),
     HotelsModule,
     RoomsModule,
     UsersModule,
