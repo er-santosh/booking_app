@@ -1,4 +1,4 @@
-import { JwtAuthGuard } from './guards/jwt.guard';
+import { IsAuthenticatedGuard } from 'src/guards/is-authenticated.guard';
 import { GetUserDto } from './../users/dto/get-user.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthService } from '../auth/auth.service';
@@ -19,6 +19,7 @@ import { RequestUser } from './interfaces/RequestUser.interface';
 import { Serialize } from 'src/interceptors/serializer.interceptor';
 import { UsersService } from '../users/users.service';
 import { Response } from 'express';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
 
 @Controller('auth')
 @Serialize(GetUserDto)
@@ -47,13 +48,13 @@ export class AuthController {
     return user;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(IsAuthenticatedGuard)
   @Get('profile')
-  async getProfile(@Req() request: RequestUser) {
-    return request.user;
+  async getProfile(@CurrentUser() user: RequestUser) {
+    return user;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(IsAuthenticatedGuard)
   @Post('signout')
   @HttpCode(HttpStatus.OK)
   async logOut(@Req() request: RequestUser, @Res() response: Response) {
